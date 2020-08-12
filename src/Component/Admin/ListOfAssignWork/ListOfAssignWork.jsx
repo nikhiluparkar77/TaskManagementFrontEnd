@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { useHistory, Link } from "react-router-dom";
+import Moment from "react-moment";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@material-ui/core";
 import { taskGetFunc, taskDeleteFunc } from "../../../Redux/Action/Admin/AuthAdmin";
@@ -36,7 +37,7 @@ const useStyles = makeStyles( {
 const ListOfAssignWork = ( { taskGetFunc, taskDeleteFunc, adminAuth } ) => {
 
   const classes = useStyles();
-  const [ ListTask, setListTask ] = useState( null );
+  const [ ListTask, setListTask ] = useState( [] );
   useEffect( () => {
     taskGetFunc();
   }, [] );
@@ -54,7 +55,7 @@ const ListOfAssignWork = ( { taskGetFunc, taskDeleteFunc, adminAuth } ) => {
   }, [ adminAuth.taskList ] );
 
   let AssignList;
-  if ( ListTask == undefined ) {
+  if ( ListTask.length === 0 ) {
     AssignList = <h1> No Task Avilable</h1>;
   } else {
     AssignList = (
@@ -63,12 +64,12 @@ const ListOfAssignWork = ( { taskGetFunc, taskDeleteFunc, adminAuth } ) => {
           <TableHead>
             <TableRow>
               <StyledTableCell>Name</StyledTableCell>
-              <StyledTableCell align="right">Task</StyledTableCell>
-              <StyledTableCell align="right">Start Time</StyledTableCell>
-              <StyledTableCell align="right">End Time</StyledTableCell>
-              <StyledTableCell align="right">Priority</StyledTableCell>
-              <StyledTableCell align="right">Status</StyledTableCell>
-              <StyledTableCell align="right">Action</StyledTableCell>
+              <StyledTableCell align="left">Task</StyledTableCell>
+              <StyledTableCell align="left">Start Time</StyledTableCell>
+              <StyledTableCell align="left">End Time</StyledTableCell>
+              <StyledTableCell align="left">Priority</StyledTableCell>
+              <StyledTableCell align="left">Status</StyledTableCell>
+              <StyledTableCell align="left">Action</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -77,11 +78,11 @@ const ListOfAssignWork = ( { taskGetFunc, taskDeleteFunc, adminAuth } ) => {
                 <StyledTableCell component="th" scope="row">
                   { item.userId.name }
                 </StyledTableCell>
-                <StyledTableCell align="right">{ item.taskAssign }</StyledTableCell>
-                <StyledTableCell align="right">{ item.StartTime }</StyledTableCell>
-                <StyledTableCell align="right">{ item.EndTime }</StyledTableCell>
-                <StyledTableCell align="right">{ item.Priority }</StyledTableCell>
-                <StyledTableCell align="right">{ item.Status }</StyledTableCell>
+                <StyledTableCell align="left">{ item.taskAssign }</StyledTableCell>
+                <StyledTableCell align="left"> <Moment format="YYYY/MM/DD">{ item.StartTime }</Moment></StyledTableCell>
+                <StyledTableCell align="left"><Moment format="YYYY/MM/DD">{ item.EndTime }</Moment></StyledTableCell>
+                <StyledTableCell align="left">{ item.Priority }</StyledTableCell>
+                <StyledTableCell align="left">{ item.Status }</StyledTableCell>
                 <StyledTableCell>
                   <ButtonComponrnt
                     onClick={ ( e ) => {

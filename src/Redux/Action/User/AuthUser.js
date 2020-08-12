@@ -15,3 +15,22 @@ export const createUser = ( userData, history ) => ( dispatch ) => {
     )
     .catch( ( err ) => console.log( err ) );
 };
+
+export const userSignIn = ( userData, history ) => ( dispatch ) => {
+  axios
+    .post( "http://localhost:5000/api/user/SignIn", userData )
+    .then(
+      ( res ) => {
+        console.log( res );
+        dispatch( {
+          type: CURRENT_USER,
+          payload: res.data,
+
+        } );
+      }
+
+      // history.push( "/admin/dashbord" )
+    )
+    .catch( ( err ) => console.log( err ) );
+};
+

@@ -9,41 +9,36 @@ const AdminComponent = () => {
   const classes = useStyles();
 
   return (
-    <div className="Admin" className={classes.root}>
+    <div className="Admin" className={ classes.root }>
       <Container maxWidth="lg">
-        <Grid container spacing={3}>
-          <Grid item md={3}>
-            <Link to="/admin/create-user" className={classes.LinkClass}>
+        <Grid container spacing={ 3 }>
+          <Grid item md={ 4 }>
+            <Link to="/admin/create-user" className={ classes.LinkClass }>
               <ButtonComponrnt
                 value="User Info"
-                className={classes.ButtonClass}
+                className={ classes.ButtonClass }
               />
             </Link>
           </Grid>
-          <Grid item md={3}>
-            <Link to="/admin/task-assign" className={classes.LinkClass}>
-              {" "}
+          <Grid item md={ 4 }>
+            <Link to="/admin/task-assign" className={ classes.LinkClass }>
+              { " " }
               <ButtonComponrnt
                 value="Task Assign"
-                className={classes.ButtonClass}
+                className={ classes.ButtonClass }
               />
             </Link>
           </Grid>
-          <Grid item md={3}>
+          <Grid item md={ 4 }>
             <ButtonComponrnt
               value="Task Status"
-              className={classes.ButtonClass}
+              className={ classes.ButtonClass }
             />
           </Grid>
-          <Grid item md={3}>
-            <ButtonComponrnt
-              value="Task Completed"
-              className={classes.ButtonClass}
-            />
-          </Grid>
+
         </Grid>
-        <Grid container spacing={3}>
-          <Grid item md={12}>
+        <Grid container spacing={ 3 }>
+          <Grid item md={ 12 }>
             <ListOfAssignWork />
           </Grid>
         </Grid>
