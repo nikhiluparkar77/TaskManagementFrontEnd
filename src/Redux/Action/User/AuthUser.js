@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { CURRENT_USER } from "../Types";
+import { CURRENT_USER, LISTED_TASK } from "../Types";
 
 export const createUser = ( userData, history ) => ( dispatch ) => {
   axios
@@ -34,3 +34,9 @@ export const userSignIn = ( userData, history ) => ( dispatch ) => {
     .catch( ( err ) => console.log( err ) );
 };
 
+export const getTask = () => ( dispatch ) => {
+  axios.get( "http://localhost:5000/api/complete/listTask" ).then( ( res ) => dispatch( {
+    type: LISTED_TASK,
+    payload: res.data
+  } ) ).catch( ( err ) => console.log( err ) );
+};

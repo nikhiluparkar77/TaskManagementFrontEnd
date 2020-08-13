@@ -12,3 +12,8 @@ export const SINGLE_USER = "SINGLE_USER";
 export const TASK_ASSAGIN = "TASK_ASSAGIN";
 export const GET_TASK = "GET_TASK";
 export const DELETE_TASK = "DELETE_TASK";
+
+
+// Task List
+
+export const LISTED_TASK = "LISTED_TASK";

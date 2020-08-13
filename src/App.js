@@ -20,16 +20,18 @@ import MenuListComposition from "./Component/Comman/Header/Menu";
 import CreateUser from "./Component/Admin/CreateUser/CreateUser";
 import EditUserForm from "./Component/Admin/EditUser/EditUserForm";
 import TaskAssign from "./Component/Admin/TaskAssign/TaskAssign";
+import GetTask from "./Component/GetTask/GetTask";
+import CompletedTask from "./Component/CompletedTask/CompletedTask";
 
-if (localStorage.jwtToken) {
-  setAdminAuthToken(localStorage.jwtToken);
-  const decode = jwt_decode(localStorage.jwtToken);
-  store.dispatch(CurrentUserSet(decode));
+if ( localStorage.jwtToken ) {
+  setAdminAuthToken( localStorage.jwtToken );
+  const decode = jwt_decode( localStorage.jwtToken );
+  store.dispatch( CurrentUserSet( decode ) );
 
   // Time over user logout
   const CTime = Date.now() / 1000;
-  if (decode.exp < CTime) {
-    localStorage.removeItem("jwtToken");
+  if ( decode.exp < CTime ) {
+    localStorage.removeItem( "jwtToken" );
     window.location = "/admin/sign-in";
   }
 }
@@ -38,22 +40,24 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <Provider store={store}>
+        <Provider store={ store }>
           <Header />
 
           <Switch>
-            <Route path="/menu" component={MenuListComposition} />
+            <Route path="/menu" component={ MenuListComposition } />
             <PrivateRoutes
               path="/admin/edit-user/:userId"
-              component={EditUserForm}
+              component={ EditUserForm }
             />
-            <PrivateRoutes path="/admin/task-assign" component={TaskAssign} />
-            <PrivateRoutes path="/admin/create-user" component={CreateUser} />
-            <Route path="/admin/sign-in" component={AdminSignIn} />
-            <Route path="/admin/sign-up" component={AdminSignUp} />
-            <PrivateRoutes path="/admin/dashbord" component={AdminComponent} />
-            <Route path="/sign-in" component={SignIn} />
-            <Route path="/" component={HomeComponent} />
+            <PrivateRoutes path="/admin/task-assign" component={ TaskAssign } />
+            <PrivateRoutes path="/admin/create-user" component={ CreateUser } />
+            <Route path="/admin/sign-in" component={ AdminSignIn } />
+            <Route path="/admin/sign-up" component={ AdminSignUp } />
+            <PrivateRoutes path="/admin/dashbord" component={ AdminComponent } />
+            <Route path="/get-task" component={ GetTask } />
+            <Route path="/completed-task" component={ CompletedTask } />
+            <Route path="/sign-in" component={ SignIn } />
+            <Route path="/" component={ HomeComponent } />
           </Switch>
 
           <Footer />
