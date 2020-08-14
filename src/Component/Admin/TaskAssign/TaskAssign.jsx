@@ -25,9 +25,11 @@ const TaskAssign = ( { taskAssignFunc, userListFunc, adminAuth, customprops } ) 
   useEffect( () => {
     userListFunc();
   }, [] );
-  const [userId, SetuserId] = useState( "" );
 
-  const [State, SetState] = useState( {
+
+  const [ userId, SetuserId ] = useState( "" );
+
+  const [ State, SetState ] = useState( {
     employee: [],
     taskAssign: "",
     StartTime: "",
@@ -41,32 +43,32 @@ const TaskAssign = ( { taskAssignFunc, userListFunc, adminAuth, customprops } ) 
     if ( adminAuth.userList === null ) {
       SetState( {
         employee: []
-      } )
+      } );
 
     } else {
       SetState( {
         employee: adminAuth.userList
-      } )
+      } );
 
     }
-  }, [adminAuth.userList] );
+  }, [ adminAuth.userList ] );
 
 
 
   const OnChange = ( e ) => {
     SetState( {
       ...State,
-      [e.target.name]: e.target.value
-    } )
-  }
+      [ e.target.name ]: e.target.value
+    } );
+  };
 
   const HandleClick = ( id ) => {
     SetuserId( id );
-  }
+  };
 
   let itemOption = State.employee.map( ( item, index ) => (
-    <MenuItem value={item._id} key={index} onClick={( e ) => { HandleClick( item._id ) }}>{item.name}</MenuItem>
-  ) )
+    <MenuItem value={ item._id } key={ index } onClick={ ( e ) => { HandleClick( item._id ); } }>{ item.name }</MenuItem>
+  ) );
 
 
   const OnSubmit = ( e ) => {
@@ -79,27 +81,27 @@ const TaskAssign = ( { taskAssignFunc, userListFunc, adminAuth, customprops } ) 
       EndTime: State.EndTime,
       Priority: State.Priority,
       Status: State.Status
-    }
+    };
 
     taskAssignFunc( taskData, history );
-  }
+  };
 
 
   return (
-    <div className="taskAssign" className={classes.EditUser}>
+    <div className="taskAssign" className={ classes.EditUser }>
       <Container maxWidth="lg">
-        <Grid container spacing={3}>
-          <Grid item md={12}>
-            <Card className={classes.CardClass}>
+        <Grid container spacing={ 3 }>
+          <Grid item md={ 12 }>
+            <Card className={ classes.CardClass }>
               <CardContent>
-                <form onSubmit={OnSubmit}>
+                <form onSubmit={ OnSubmit }>
                   <Typography gutterBottom variant="h5" component="h5">
                     Task Assign
                   </Typography>
-                  <Divider className={classes.DividClass} />
+                  <Divider className={ classes.DividClass } />
                   <FormControl
                     variant="outlined"
-                    className={classes.TextClasses}
+                    className={ classes.TextClasses }
                   >
                     <InputLabel id="demo-simple-select-outlined-label">
                       Employee Name
@@ -107,27 +109,27 @@ const TaskAssign = ( { taskAssignFunc, userListFunc, adminAuth, customprops } ) 
                     <Select
                       labelId="demo-simple-select-outlined-label"
                       id="demo-simple-select-outlined"
-                      value={userId}
-                      onChange={OnChange}
+                      value={ userId }
+                      onChange={ OnChange }
                       label="Employee Name"
                     >
-                      {itemOption}
+                      { itemOption }
                     </Select>
                   </FormControl>
                   <TextBox
                     label="Task Assign"
                     type="text"
                     name="taskAssign"
-                    value={State.taskAssign}
-                    onChange={OnChange}
+                    value={ State.taskAssign }
+                    onChange={ OnChange }
                   />
                   <label>Start Time</label>
                   <TextBox
                     label=""
                     type="date"
                     name="StartTime"
-                    value={State.StartTime}
-                    onChange={OnChange}
+                    value={ State.StartTime }
+                    onChange={ OnChange }
                   />
                   <label>End Time</label>
                   <TextBox
@@ -135,12 +137,12 @@ const TaskAssign = ( { taskAssignFunc, userListFunc, adminAuth, customprops } ) 
                     variant="outlined"
                     type="date"
                     name="EndTime"
-                    value={State.EndTime}
-                    onChange={OnChange}
+                    value={ State.EndTime }
+                    onChange={ OnChange }
                   />
                   <FormControl
                     variant="outlined"
-                    className={classes.TextClasses}
+                    className={ classes.TextClasses }
                   >
                     <InputLabel id="demo-simple-select-outlined-label">
                       Priority
@@ -148,8 +150,8 @@ const TaskAssign = ( { taskAssignFunc, userListFunc, adminAuth, customprops } ) 
                     <Select
                       labelId="demo-simple-select-outlined-label"
                       id="demo-simple-select-outlined"
-                      value={State.Priority}
-                      onChange={OnChange}
+                      value={ State.Priority }
+                      onChange={ OnChange }
                       name="Priority"
                       label="Priority"
                     >
@@ -163,7 +165,7 @@ const TaskAssign = ( { taskAssignFunc, userListFunc, adminAuth, customprops } ) 
                   </FormControl>
                   <FormControl
                     variant="outlined"
-                    className={classes.TextClasses}
+                    className={ classes.TextClasses }
                   >
                     <InputLabel id="demo-simple-select-outlined-label">
                       Status
@@ -171,8 +173,8 @@ const TaskAssign = ( { taskAssignFunc, userListFunc, adminAuth, customprops } ) 
                     <Select
                       labelId="demo-simple-select-outlined-label"
                       id="demo-simple-select-outlined"
-                      value={State.Status}
-                      onChange={OnChange}
+                      value={ State.Status }
+                      onChange={ OnChange }
                       label="Status"
                       name="Status"
                     >
@@ -187,7 +189,7 @@ const TaskAssign = ( { taskAssignFunc, userListFunc, adminAuth, customprops } ) 
                     </Select>
                   </FormControl>
 
-                  <Divider className={classes.DividClass} />
+                  <Divider className={ classes.DividClass } />
                   <ButtonComponrnt type="submit" value="Task Assign" />
                 </form>
               </CardContent>

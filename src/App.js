@@ -20,8 +20,9 @@ import MenuListComposition from "./Component/Comman/Header/Menu";
 import CreateUser from "./Component/Admin/CreateUser/CreateUser";
 import EditUserForm from "./Component/Admin/EditUser/EditUserForm";
 import TaskAssign from "./Component/Admin/TaskAssign/TaskAssign";
-import GetTask from "./Component/GetTask/GetTask";
+import GetAssignTask from "./Component/GetTask/GetAssignTask/GetTask";
 import CompletedTask from "./Component/CompletedTask/CompletedTask";
+import GetDetailAssignTask from "./Component/GetTask/GetDetailAssignTask/GetDetailAssignTask";
 
 if ( localStorage.jwtToken ) {
   setAdminAuthToken( localStorage.jwtToken );
@@ -54,7 +55,8 @@ function App() {
             <Route path="/admin/sign-in" component={ AdminSignIn } />
             <Route path="/admin/sign-up" component={ AdminSignUp } />
             <PrivateRoutes path="/admin/dashbord" component={ AdminComponent } />
-            <Route path="/get-task" component={ GetTask } />
+            <Route path="/get-details" component={ GetDetailAssignTask } />
+            <Route path="/get-task" component={ GetAssignTask } />
             <Route path="/completed-task" component={ CompletedTask } />
             <Route path="/sign-in" component={ SignIn } />
             <Route path="/" component={ HomeComponent } />
