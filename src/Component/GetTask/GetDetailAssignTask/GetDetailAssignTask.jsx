@@ -1,18 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import {
-    Divider, InputLabel, FormControl, MenuItem, Select,
-    Card,
-    CardContent,
-    Typography,
-    Container,
-    Grid,
-} from "@material-ui/core";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import { PropTypes } from "prop-types";
+import { Divider, InputLabel, FormControl, MenuItem, Select, Card, CardContent, Typography, Container, Grid, } from "@material-ui/core";
 import { useStyles } from "../../../Assets/Style/AssignDetails";
 import TextBox from '../../Comman/Fields/TextBox';
 import TextArea from '../../Comman/Fields/TextArea';
 import ButtonComponrnt from '../../Comman/Fields/ButtonComponrnt';
+import { getSingleTask } from '../../../Redux/Action/User/AuthUser';
 
-const GetDetailAssignTask = () => {
+const GetDetailAssignTask = ( { getSingleTask, customprops, userAuth } ) => {
+
+    useEffect( () => {
+        getSingleTask( customprops.match.params.gtId );
+    }, [] );
+
+    console.log( userAuth.taskDetails );
+
 
     const classes = useStyles();
     const [ State, SetState ] = useState( {
@@ -173,4 +177,16 @@ const GetDetailAssignTask = () => {
     );
 };
 
-export default GetDetailAssignTask;
+GetDetailAssignTask.propTypes = {
+    getSingleTask: PropTypes.func.isRequired,
+    userAuth: PropTypes.object.isRequired
+};
+
+const mapStateToProps = ( state ) => ( {
+    userAuth: state.userAuth
+} );
+const mapDispatchToProps = {
+    getSingleTask
+};
+
+export default connect( mapStateToProps, mapDispatchToProps )( GetDetailAssignTask );

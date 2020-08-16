@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import TextBox from "../Comman/Fields/TextBox";
@@ -15,8 +15,16 @@ import {
 import { userSignIn } from "../../Redux/Action/User/AuthUser";
 
 
-const SignIn = ( { userSignIn } ) => {
+const SignIn = ( { userSignIn, userAuth, }, customprops ) => {
   const classes = useStyles();
+  const history = useHistory();
+  useEffect( () => {
+    if ( userAuth.isAuthenticated ) {
+      history.push( "/get-task" );
+    }
+  } );
+
+  console.log( customprops );
 
   const [ State, SetState ] = useState( {
     email: "",
@@ -71,7 +79,7 @@ SignIn.propTypes = {
 
 
 const mapStateToProps = ( state ) => ( {
-  adminAuth: state.adminAuth
+  userAuth: state.userAuth
 } );
 
 const mapDispatchToProps = {

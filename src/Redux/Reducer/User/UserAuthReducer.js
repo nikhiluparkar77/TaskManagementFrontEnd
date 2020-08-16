@@ -1,10 +1,11 @@
-import { CURRENT_USER, LISTED_TASK, GET_TASK } from "../../Action/Types";
+import { CURRENT_USER, LISTED_TASK, GET_TASK, GET_SINGLE_TASK } from "../../Action/Types";
 
 const initialState = {
   isAuthenticated: false,
   user: {},
   listedTask: [],
   taskList: [],
+  taskDetails: null
 };
 
 export default function ( state = initialState, action ) {
@@ -24,6 +25,12 @@ export default function ( state = initialState, action ) {
       return {
         ...state,
         taskList: action.payload,
+      };
+
+    case GET_SINGLE_TASK:
+      return {
+        ...state,
+        taskDetails: action.payload,
       };
 
     default:

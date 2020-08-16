@@ -82,9 +82,11 @@ const GetAssignTask = ( { getTask, getAssignTask, userAuth } ) => {
                                 <StyledTableCell align="left">{ item.Priority }</StyledTableCell>
                                 <StyledTableCell align="left">{ item.Status }</StyledTableCell>
                                 <StyledTableCell>
-                                    <Link to="/"></Link> <ButtonComponrnt
-                                        value="Details"
-                                    /></StyledTableCell>
+                                    <Link to={ `/get-details/${ item._id }` }>
+                                        <ButtonComponrnt
+                                            value="Details"
+                                        />
+                                    </Link> </StyledTableCell>
                             </StyledTableRow>
                         ) ) }
                     </TableBody>

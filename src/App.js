@@ -7,8 +7,9 @@ import store from "./Redux/store";
 import setAdminAuthToken from "./Component/Admin/SetAdminAuth/SetAdminAuthToken";
 import setUserAuthToken from "./Component/SetUserAuth/setUserAuthToken";
 import PrivateRoutes from "./Component/Routes/PrivateRoutes";
+import UserPrivateRoute from "./Component/Routes/PrivateUserRoute";
 import { CurrentAdminSet } from "./Redux/Action/Admin/AuthAdmin";
-import { CurrentUserSet } from "./Redux/Action/User/AuthUser";
+import { CurrentUserSet, getAssignTask } from "./Redux/Action/User/AuthUser";
 
 // Components
 import Header from "./Component/Comman/Header/Header";
@@ -68,8 +69,9 @@ function App() {
             <Route path="/admin/sign-in" component={ AdminSignIn } />
             <Route path="/admin/sign-up" component={ AdminSignUp } />
             <PrivateRoutes path="/admin/dashbord" component={ AdminComponent } />
-            <Route path="/get-details" component={ GetDetailAssignTask } />
-            <Route path="/get-task" component={ GetAssignTask } />
+            <UserPrivateRoute path="/admin/dashbord" component={ getAssignTask } />
+            <UserPrivateRoute path="/get-details/:gtId" component={ GetDetailAssignTask } />
+            <UserPrivateRoute path="/get-task" component={ GetAssignTask } />
             <Route path="/completed-task" component={ CompletedTask } />
             <Route path="/sign-in" component={ SignIn } />
             <Route path="/" component={ HomeComponent } />

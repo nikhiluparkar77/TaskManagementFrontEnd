@@ -1,6 +1,6 @@
 import axios from "axios";
 import jwt_decode from "jwt-decode";
-import { CURRENT_USER, LISTED_TASK, GET_TASK } from "../Types";
+import { CURRENT_USER, LISTED_TASK, GET_TASK, GET_SINGLE_TASK } from "../Types";
 import setUserAuthToken from "../../../Component/SetUserAuth/setUserAuthToken";
 
 export const createUser = ( userData, history ) => ( dispatch ) => {
@@ -60,6 +60,15 @@ export const getTask = () => ( dispatch ) => {
 export const getAssignTask = () => ( dispatch ) => {
   axios.get( "http://localhost:5000/api/task/taskList" ).then( ( res ) => dispatch( {
     type: GET_TASK,
+    payload: res.data
+  } ) ).catch( ( err ) => console.log( err ) );
+};
+
+
+// Get Single Task
+export const getSingleTask = ( id ) => ( dispatch ) => {
+  axios.get( `http://localhost:5000/api/task/getTaskList/${ id }` ).then( ( res ) => dispatch( {
+    type: GET_SINGLE_TASK,
     payload: res.data
   } ) ).catch( ( err ) => console.log( err ) );
 };

@@ -52,7 +52,6 @@ export const CurrentAdminSet = ( decode ) => {
 // Admin Logout
 export const AdminLogout = () => ( dispatch ) => {
   localStorage.removeItem( "jwtToken" );
-  localStorage.removeItem( "jwtUserToken" );
   setAdminAuthToken( false );
   dispatch( CurrentAdminSet( false ) );
 };
