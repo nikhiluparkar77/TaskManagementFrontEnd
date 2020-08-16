@@ -5,8 +5,10 @@ import jwt_decode from "jwt-decode";
 import store from "./Redux/store";
 
 import setAdminAuthToken from "./Component/Admin/SetAdminAuth/SetAdminAuthToken";
+import setUserAuthToken from "./Component/SetUserAuth/setUserAuthToken";
 import PrivateRoutes from "./Component/Routes/PrivateRoutes";
-import { CurrentUserSet } from "./Redux/Action/Admin/AuthAdmin";
+import { CurrentAdminSet } from "./Redux/Action/Admin/AuthAdmin";
+import { CurrentUserSet } from "./Redux/Action/User/AuthUser";
 
 // Components
 import Header from "./Component/Comman/Header/Header";
@@ -24,16 +26,27 @@ import GetAssignTask from "./Component/GetTask/GetAssignTask/GetTask";
 import CompletedTask from "./Component/CompletedTask/CompletedTask";
 import GetDetailAssignTask from "./Component/GetTask/GetDetailAssignTask/GetDetailAssignTask";
 
+
 if ( localStorage.jwtToken ) {
+
   setAdminAuthToken( localStorage.jwtToken );
   const decode = jwt_decode( localStorage.jwtToken );
-  store.dispatch( CurrentUserSet( decode ) );
-
+  store.dispatch( CurrentAdminSet( decode ) );
   // Time over user logout
   const CTime = Date.now() / 1000;
   if ( decode.exp < CTime ) {
     localStorage.removeItem( "jwtToken" );
     window.location = "/admin/sign-in";
+  }
+} else if ( localStorage.jwtUserToken ) {
+  setUserAuthToken( localStorage.jwtUserToken );
+  const decode = jwt_decode( localStorage.jwtUserToken );
+  store.dispatch( CurrentUserSet( decode ) );
+  // Time over user logout
+  const CTime = Date.now() / 1000;
+  if ( decode.exp < CTime ) {
+    localStorage.removeItem( "jwtUserToken" );
+    window.location = "/sign-in";
   }
 }
 

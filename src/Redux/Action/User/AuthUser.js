@@ -1,5 +1,7 @@
 import axios from "axios";
+import jwt_decode from "jwt-decode";
 import { CURRENT_USER, LISTED_TASK, GET_TASK } from "../Types";
+import setUserAuthToken from "../../../Component/SetUserAuth/setUserAuthToken";
 
 export const createUser = ( userData, history ) => ( dispatch ) => {
   axios
@@ -20,18 +22,32 @@ export const userSignIn = ( userData, history ) => ( dispatch ) => {
     .post( "http://localhost:5000/api/user/SignIn", userData )
     .then(
       ( res ) => {
-        console.log( res );
-        dispatch( {
-          type: CURRENT_USER,
-          payload: res.data,
-
-        } );
+        const { token } = res.data;
+        localStorage.setItem( "jwtUserToken", token );
+        setUserAuthToken( token );
+        const decode = jwt_decode( token );
+        dispatch( CurrentUserSet( decode ) );
       }
 
-      // history.push( "/admin/dashbord" )
     )
     .catch( ( err ) => console.log( err ) );
 };
+
+// Set  User
+export const CurrentUserSet = ( decode ) => {
+  return {
+    type: CURRENT_USER,
+    payload: decode,
+  };
+};
+
+// User Logout
+export const UserLogout = () => ( dispatch ) => {
+  localStorage.removeItem( "jwtUserToken" );
+  setUserAuthToken( false );
+  dispatch( CurrentUserSet( false ) );
+};
+
 
 export const getTask = () => ( dispatch ) => {
   axios.get( "http://localhost:5000/api/complete/listTask" ).then( ( res ) => dispatch( {

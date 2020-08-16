@@ -35,14 +35,14 @@ export const AdminAuthSignIn = ( adminSignInData, history ) => ( dispatch ) => {
       localStorage.setItem( "jwtToken", token );
       setAdminAuthToken( token );
       const decode = jwt_decode( token );
-      dispatch( CurrentUserSet( decode ) );
+      dispatch( CurrentAdminSet( decode ) );
     } )
     .catch( ( err ) => {
       console.log( err );
     } );
 };
 
-export const CurrentUserSet = ( decode ) => {
+export const CurrentAdminSet = ( decode ) => {
   return {
     type: CURRENT_ADMIN,
     payload: decode,
@@ -52,8 +52,9 @@ export const CurrentUserSet = ( decode ) => {
 // Admin Logout
 export const AdminLogout = () => ( dispatch ) => {
   localStorage.removeItem( "jwtToken" );
+  localStorage.removeItem( "jwtUserToken" );
   setAdminAuthToken( false );
-  dispatch( CurrentUserSet( false ) );
+  dispatch( CurrentAdminSet( false ) );
 };
 
 // User List

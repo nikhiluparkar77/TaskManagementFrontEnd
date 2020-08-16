@@ -24,7 +24,6 @@ const TextArea = ( { label, value, name, type, onChange } ) => {
                 onChange={ onChange }
                 className={ classes.TextClasses }
                 rows={ 3 }
-
                 variant="outlined"
             />
         </div>
