@@ -5,13 +5,7 @@ import PropTypes from "prop-types";
 import TextBox from "../Comman/Fields/TextBox";
 import ButtonComponrnt from "../Comman/Fields/ButtonComponrnt";
 import { useStyles } from "../../Assets/Style/SignIn";
-import {
-  Grid,
-  Divider,
-  Card,
-  CardContent,
-  Typography,
-} from "@material-ui/core";
+import { Grid, Divider, Card, CardContent, Typography, } from "@material-ui/core";
 import { userSignIn } from "../../Redux/Action/User/AuthUser";
 
 
@@ -24,7 +18,7 @@ const SignIn = ( { userSignIn, userAuth, }, customprops ) => {
     }
   } );
 
-  console.log( customprops );
+
 
   const [ State, SetState ] = useState( {
     email: "",

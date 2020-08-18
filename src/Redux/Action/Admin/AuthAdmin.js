@@ -125,6 +125,8 @@ export const taskGetFunc = () => ( dispatch ) => {
     .catch( ( err ) => console.log( err ) );
 };
 
+
+
 // DELETE Task
 export const taskDeleteFunc = ( id ) => ( dispatch ) => {
   axios

@@ -45,7 +45,7 @@ const GetAssignTask = ( { getTask, getAssignTask, userAuth } ) => {
     const [ TaskList, SetTaskList ] = useState( [] );
     useEffect( () => {
         getAssignTask();
-        getTask();
+        // getTask();
     }, [] );
 
     useEffect( () => {
@@ -113,9 +113,7 @@ const GetAssignTask = ( { getTask, getAssignTask, userAuth } ) => {
 };
 
 GetAssignTask.propTypes = {
-    getTask: PropTypes.func.isRequired,
     getAssignTask: PropTypes.func.isRequired,
-    listedTask: PropTypes.array.isRequired,
     taskList: PropTypes.array.isRequired,
 };
 const mapStateToProps = ( state ) => ( {
@@ -124,7 +122,6 @@ const mapStateToProps = ( state ) => ( {
 } );
 
 const mapDispatchToProps = {
-    getTask,
     getAssignTask
 };
 

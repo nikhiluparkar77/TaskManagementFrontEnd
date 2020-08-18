@@ -14,6 +14,9 @@ export const GET_TASK = "GET_TASK";
 export const GET_SINGLE_TASK = "GET_SINGLE_TASK";
 export const DELETE_TASK = "DELETE_TASK";
 
+// Add Complete Task
+export const ADD_COMPLETE_TASK = "ADD_COMPLETE_TASK";
+
 
 // Task List
 

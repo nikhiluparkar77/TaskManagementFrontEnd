@@ -69,7 +69,7 @@ function App() {
             <Route path="/admin/sign-in" component={ AdminSignIn } />
             <Route path="/admin/sign-up" component={ AdminSignUp } />
             <PrivateRoutes path="/admin/dashbord" component={ AdminComponent } />
-            <UserPrivateRoute path="/admin/dashbord" component={ getAssignTask } />
+
             <UserPrivateRoute path="/get-details/:gtId" component={ GetDetailAssignTask } />
             <UserPrivateRoute path="/get-task" component={ GetAssignTask } />
             <Route path="/completed-task" component={ CompletedTask } />

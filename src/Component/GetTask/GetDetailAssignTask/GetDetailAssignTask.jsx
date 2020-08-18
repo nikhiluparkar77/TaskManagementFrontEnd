@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Moment from "react-moment";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { PropTypes } from "prop-types";
@@ -7,20 +8,12 @@ import { useStyles } from "../../../Assets/Style/AssignDetails";
 import TextBox from '../../Comman/Fields/TextBox';
 import TextArea from '../../Comman/Fields/TextArea';
 import ButtonComponrnt from '../../Comman/Fields/ButtonComponrnt';
-import { getSingleTask } from '../../../Redux/Action/User/AuthUser';
+import { getSingleTask, addCompltedTask } from '../../../Redux/Action/User/AuthUser';
 
-const GetDetailAssignTask = ( { getSingleTask, customprops, userAuth } ) => {
-
-    useEffect( () => {
-        getSingleTask( customprops.match.params.gtId );
-    }, [] );
-
-    console.log( userAuth.taskDetails );
-
-
+const GetDetailAssignTask = ( { getSingleTask, customprops, userAuth, addCompltedTask } ) => {
     const classes = useStyles();
     const [ State, SetState ] = useState( {
-        userId: "",
+        taskId: "",
         taskAssign: "",
         StartTime: "",
         EndTime: "",
@@ -28,6 +21,41 @@ const GetDetailAssignTask = ( { getSingleTask, customprops, userAuth } ) => {
         Status: "",
         Comment: ""
     } );
+
+
+    useEffect( () => {
+        getSingleTask( customprops.match.params.gtId );
+    }, [] );
+
+    useEffect( () => {
+        if ( userAuth.taskDetails == null ) {
+            SetState( {
+                taskId: "",
+                taskAssign: "",
+                StartTime: "",
+                EndTime: "",
+                Priority: "",
+                Status: "",
+                Comment: ""
+            } );
+        } else {
+            SetState( {
+                taskId: userAuth.taskDetails._id,
+                taskAssign: userAuth.taskDetails.taskAssign,
+                StartTime: userAuth.taskDetails.StartTime,
+                EndTime: userAuth.taskDetails.EndTime,
+                Priority: userAuth.taskDetails.Priority,
+                Status: userAuth.taskDetails.Status,
+                Comment: userAuth.taskDetails.Comment
+            } );
+        }
+
+    }, [ userAuth.taskDetails ] );
+
+
+
+
+
     const OnChange = ( e ) => {
         SetState( {
             ...State,
@@ -38,8 +66,22 @@ const GetDetailAssignTask = ( { getSingleTask, customprops, userAuth } ) => {
 
     const OnSubmit = ( e ) => {
         e.preventDefault();
+        const TeskInfo = {
+            taskId: userAuth.taskDetails._id,
+            taskAssign: userAuth.taskDetails.taskAssign,
+            StartTime: userAuth.taskDetails.StartTime,
+            EndTime: userAuth.taskDetails.EndTime,
+            Priority: userAuth.taskDetails.Priority,
+            Status: State.Status,
+            Comment: State.Comment
+        };
+
+
+        addCompltedTask( TeskInfo, customprops.history );
 
     };
+
+
 
     return (
         <div className="EditUser" className={ classes.EditUser }>
@@ -57,40 +99,24 @@ const GetDetailAssignTask = ( { getSingleTask, customprops, userAuth } ) => {
                                     <Divider className={ classes.DividClass } />
                                     <Grid container spacing={ 2 }>
                                         <Grid item md={ 12 }>
-                                            <TextBox
-                                                label="Task Assign"
-                                                type="text"
-                                                name="taskAssign"
-                                                value={ State.taskAssign }
-                                                onChange={ OnChange }
-                                            />
+                                            <Typography gutterBottom variant="h6" component="h6">
+                                                Task:
+                                            </Typography>
+                                            { State.taskAssign }
                                         </Grid>
-
                                     </Grid>
-
-
                                     <Grid container spacing={ 2 }>
                                         <Grid item md={ 6 }>
-                                            <label>Start Time</label>
-                                            <TextBox
-                                                label=""
-                                                type="date"
-                                                name="StartTime"
-                                                value={ State.StartTime }
-                                                onChange={ OnChange }
-                                            />
+                                            <Typography gutterBottom variant="h6" component="h6">
+                                                Start Time:
+                                            </Typography>
+                                            <Moment format="YYYY/MM/DD">{ State.StartTime }</Moment>
                                         </Grid>
                                         <Grid item md={ 6 }>
-
-                                            <label>End Time</label>
-                                            <TextBox
-                                                label=""
-                                                type="date"
-                                                name="EndTime"
-                                                value={ State.EndTime }
-                                                onChange={ OnChange }
-                                            />
-
+                                            <Typography gutterBottom variant="h6" component="h6">
+                                                End Time:
+                                            </Typography>
+                                            <Moment format="YYYY/MM/DD">{ State.EndTime }</Moment>
                                         </Grid>
                                     </Grid>
 
@@ -159,12 +185,7 @@ const GetDetailAssignTask = ( { getSingleTask, customprops, userAuth } ) => {
                                                 onChange={ OnChange }
                                             />
                                         </Grid>
-
                                     </Grid>
-
-
-
-
                                     <Divider className={ classes.DividClass } />
                                     <ButtonComponrnt type="submit" value="Submit" />
                                 </form>
@@ -179,14 +200,16 @@ const GetDetailAssignTask = ( { getSingleTask, customprops, userAuth } ) => {
 
 GetDetailAssignTask.propTypes = {
     getSingleTask: PropTypes.func.isRequired,
-    userAuth: PropTypes.object.isRequired
+    userAuth: PropTypes.object.isRequired,
+    addCompltedTask: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = ( state ) => ( {
     userAuth: state.userAuth
 } );
 const mapDispatchToProps = {
-    getSingleTask
+    getSingleTask,
+    addCompltedTask
 };
 
 export default connect( mapStateToProps, mapDispatchToProps )( GetDetailAssignTask );
