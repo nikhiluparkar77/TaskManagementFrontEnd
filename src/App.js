@@ -19,6 +19,7 @@ import HomeComponent from "./Component/HomeComponent/HomeComponent";
 import AdminSignUp from "./Component/Admin/AdminAuth/AdminSignUp";
 import AdminSignIn from "./Component/Admin/AdminAuth/AdminSignIn";
 import AdminComponent from "./Component/Admin/AdminComponent";
+import TaskStatus from "./Component/Admin/TaskStatus/TaskStatus";
 import MenuListComposition from "./Component/Comman/Header/Menu";
 import CreateUser from "./Component/Admin/CreateUser/CreateUser";
 import EditUserForm from "./Component/Admin/EditUser/EditUserForm";
@@ -60,6 +61,7 @@ function App() {
 
           <Switch>
             <Route path="/menu" component={ MenuListComposition } />
+            <PrivateRoutes path="/admin/task-status" component={ TaskStatus } />
             <PrivateRoutes
               path="/admin/edit-user/:userId"
               component={ EditUserForm }
@@ -72,6 +74,7 @@ function App() {
 
             <UserPrivateRoute path="/get-details/:gtId" component={ GetDetailAssignTask } />
             <UserPrivateRoute path="/get-task" component={ GetAssignTask } />
+            <UserPrivateRoute path="/home" component={ HomeComponent } />
             <Route path="/completed-task" component={ CompletedTask } />
             <Route path="/sign-in" component={ SignIn } />
             <Route path="/" component={ HomeComponent } />

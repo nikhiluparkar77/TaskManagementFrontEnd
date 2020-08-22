@@ -3,11 +3,10 @@ import Moment from "react-moment";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { PropTypes } from "prop-types";
-import { getTask } from '../../Redux/Action/User/AuthUser';
+import { getCompleteTask } from '../../../Redux/Action/Admin/AuthAdmin';
 import { withStyles, makeStyles } from "@material-ui/core/styles";
-import { Container, Grid, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@material-ui/core";
-import ButtonComponrnt from '../../Component/Comman/Fields/ButtonComponrnt';
-
+import { Container, Grid, } from "@material-ui/core";
+import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@material-ui/core";
 
 const StyledTableCell = withStyles( ( theme ) => ( {
     head: {
@@ -32,32 +31,36 @@ const useStyles = makeStyles( {
     table: {
         minWidth: 700,
     },
-    GetTasked: {
-        margin: "5% 0%",
-    },
-    LinkClass: {
-        textDecoration: "none",
-        color: "#3f51b5",
+    root: {
+        flexGrow: 1,
+        margin: "4% 0%",
     },
 } );
 
-const CompletedTask = ( { getTask, userAuth } ) => {
+const TaskStatus = ( { getCompleteTask, adminAuth } ) => {
     const classes = useStyles();
-    const [ CompleteTaskList, SetCompleteTaskList ] = useState( [] );
+    const [ TaskStatus, setTaskStatus ] = useState( [] );
+
     useEffect( () => {
-        getTask();
+        getCompleteTask();
     }, [] );
 
     useEffect( () => {
-        SetCompleteTaskList( userAuth.listedTask );
-    }, [ userAuth.listedTask ] );
+        setTaskStatus( adminAuth.CompleteTask );
+    }, [ adminAuth.taskList ] );
 
-    console.log( CompleteTaskList );
-    let CompleteList;
-    if ( CompleteTaskList.length === 0 ) {
-        CompleteList = <h1> No Assign Task Avilable</h1>;
+
+
+    useEffect( () => {
+        setTaskStatus( adminAuth.CompleteTask );
+    }, [ adminAuth.CompleteTask ] );
+
+
+    let StatusTask;
+    if ( TaskStatus.length === 0 ) {
+        StatusTask = <h1> Not Completed Task Avilable</h1>;
     } else {
-        CompleteList = (
+        StatusTask = (
             <TableContainer component={ Paper }>
                 <Table className={ classes.table } aria-label="customized table">
                     <TableHead>
@@ -66,28 +69,30 @@ const CompletedTask = ( { getTask, userAuth } ) => {
                             <StyledTableCell align="left">Task</StyledTableCell>
                             <StyledTableCell align="left">Start Time</StyledTableCell>
                             <StyledTableCell align="left">End Time</StyledTableCell>
-
+                            <StyledTableCell align="left">Priority</StyledTableCell>
                             <StyledTableCell align="left">Status</StyledTableCell>
                             <StyledTableCell align="left">Action</StyledTableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        { CompleteTaskList.map( ( item, index ) => (
+                        { TaskStatus.map( ( item, index ) => (
                             <StyledTableRow key={ index }>
                                 <StyledTableCell component="th" scope="row">
                                     { item.userId.name }
                                 </StyledTableCell>
-                                <StyledTableCell align="left">{ item.taskId.taskAssign }</StyledTableCell>
+                                <StyledTableCell align="left">{ item.taskAssign }</StyledTableCell>
                                 <StyledTableCell align="left"> <Moment format="YYYY/MM/DD">{ item.StartTime }</Moment></StyledTableCell>
                                 <StyledTableCell align="left"><Moment format="YYYY/MM/DD">{ item.EndTime }</Moment></StyledTableCell>
-
+                                <StyledTableCell align="left">{ item.Priority }</StyledTableCell>
                                 <StyledTableCell align="left">{ item.Status }</StyledTableCell>
                                 <StyledTableCell>
-                                    <Link to={ `/get-details/${ item._id }` }>
-                                        <ButtonComponrnt
-                                            value="Details"
-                                        />
-                                    </Link> </StyledTableCell>
+                                    {/* <ButtonComponrnt
+                                        onClick={ ( e ) => {
+                                            HandleAssignDelete( item._id );
+                                        } }
+                                        value="Delete"
+                                    /> */}
+                                </StyledTableCell>
                             </StyledTableRow>
                         ) ) }
                     </TableBody>
@@ -95,33 +100,34 @@ const CompletedTask = ( { getTask, userAuth } ) => {
             </TableContainer>
         );
     }
-    return (
-        <div className="GetAssignTask" className={ classes.GetTasked }>
-            <Container maxWidth="lg">
 
-                <Grid container spacing={ 3 }>
+    return (
+        <div className="AdminCompleteTask" className={ classes.root }>
+            <Container>
+                <Grid container spacing={ 2 }>
                     <Grid item md={ 12 }>
-                        <h3>Get Completed Task</h3>
-                        { CompleteList }
+                        <h4>Task Status</h4>
+                        { StatusTask }
                     </Grid>
                 </Grid>
+
             </Container>
+
         </div>
     );
 };
 
-CompletedTask.propTypes = {
-    getTask: PropTypes.func.isRequired,
-    listedTask: PropTypes.array.isRequired,
-    taskList: PropTypes.array.isRequired,
+
+TaskStatus.propTypes = {
+    getCompleteTask: PropTypes.func.isRequired,
+    adminAuth: PropTypes.object.isRequired,
 };
+
 const mapStateToProps = ( state ) => ( {
-    listedTask: state.listedTask,
-    userAuth: state.userAuth
+    adminAuth: state.adminAuth,
 } );
-
 const mapDispatchToProps = {
-    getTask
+    getCompleteTask,
 };
 
-export default connect( mapStateToProps, mapDispatchToProps )( CompletedTask );
+export default connect( mapStateToProps, mapDispatchToProps )( TaskStatus );

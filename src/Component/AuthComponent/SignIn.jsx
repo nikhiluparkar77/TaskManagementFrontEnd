@@ -14,7 +14,7 @@ const SignIn = ( { userSignIn, userAuth, }, customprops ) => {
   const history = useHistory();
   useEffect( () => {
     if ( userAuth.isAuthenticated ) {
-      history.push( "/get-task" );
+      history.push( "/home" );
     }
   } );
 

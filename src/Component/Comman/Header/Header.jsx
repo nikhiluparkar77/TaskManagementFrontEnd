@@ -59,6 +59,9 @@ const Header = ( { AdminLogout, adminAuth, UserLogout, userAuth } ) => {
 
   const UserLink = (
     <>
+      <Link className={ classes.LinkClass } to="/home">
+        <Button color="inherit">Home</Button>
+      </Link>
       <Avatar
         alt={ userAuth.isAuthenticated.name }
         className={ classes.adminAvatar }

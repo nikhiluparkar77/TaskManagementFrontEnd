@@ -16,6 +16,8 @@ export const DELETE_TASK = "DELETE_TASK";
 
 // Add Complete Task
 export const ADD_COMPLETE_TASK = "ADD_COMPLETE_TASK";
+export const GET_COMPLETE_TASK = "GET_COMPLETE_TASK";
+
 
 
 // Task List

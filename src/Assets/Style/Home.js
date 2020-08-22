@@ -1,9 +1,9 @@
 import { makeStyles } from "@material-ui/core/styles";
 
-export const useStyles = makeStyles((theme) => ({
+export const useStyles = makeStyles( ( theme ) => ( {
   root: {
     "& > *": {
-      margin: theme.spacing(0),
+      margin: theme.spacing( 0 ),
       width: "100%",
     },
   },
@@ -12,8 +12,15 @@ export const useStyles = makeStyles((theme) => ({
     background: "#e0e0e0",
     backgroundSize: "cover",
     backgroundPosition: "center",
-    height: "70vh",
-    paddingTop: "7%",
+    height: "65vh",
+    paddingTop: "5%",
     position: "relative",
   },
-}));
+  ButtonClass: {
+    width: "100%",
+  },
+  LinkClass: {
+    textDecoration: "none",
+    color: "#3f51b5",
+  },
+} ) );

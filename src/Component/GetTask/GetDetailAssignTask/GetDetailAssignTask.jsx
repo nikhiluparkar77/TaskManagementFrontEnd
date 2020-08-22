@@ -86,6 +86,8 @@ const GetDetailAssignTask = ( { getSingleTask, customprops, userAuth, addComplte
     return (
         <div className="EditUser" className={ classes.EditUser }>
             <Container>
+
+
                 <Grid container spacing={ 2 }>
                     <Grid item md={ 12 }>
                         <Card className={ classes.CardClass }>

@@ -30,10 +30,10 @@ const AdminComponent = () => {
             </Link>
           </Grid>
           <Grid item md={ 4 }>
-            <ButtonComponrnt
+            <Link to="/admin/task-status" className={ classes.LinkClass }><ButtonComponrnt
               value="Task Status"
               className={ classes.ButtonClass }
-            />
+            /></Link>
           </Grid>
 
         </Grid>
