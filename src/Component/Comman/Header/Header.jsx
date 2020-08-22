@@ -35,6 +35,9 @@ const Header = ( { AdminLogout, adminAuth, UserLogout, userAuth } ) => {
 
   const AdminLink = (
     <>
+      <Link className={ classes.LinkClass } to="/admin/dashbord">
+        <Button color="inherit">DashBord</Button>
+      </Link>
       <Avatar
         alt={ isAuthenticated.name }
         className={ classes.adminAvatar }
@@ -59,6 +62,7 @@ const Header = ( { AdminLogout, adminAuth, UserLogout, userAuth } ) => {
 
   const UserLink = (
     <>
+
       <Link className={ classes.LinkClass } to="/home">
         <Button color="inherit">Home</Button>
       </Link>
@@ -84,7 +88,7 @@ const Header = ( { AdminLogout, adminAuth, UserLogout, userAuth } ) => {
             <Toolbar>
               { " " }
               <Typography variant="h6" className={ classes.title }>
-                <Link className={ classes.LinkClass } to="/admin/dashbord">
+                <Link className={ classes.LinkClass } to="/">
                   Tast Management System
                 </Link>
               </Typography>

@@ -1,9 +1,9 @@
 import { makeStyles } from "@material-ui/core/styles";
 
-export const useStyles = makeStyles((theme) => ({
+export const useStyles = makeStyles( ( theme ) => ( {
   root: {
     "& > *": {
-      margin: theme.spacing(0),
+      margin: theme.spacing( 0 ),
       width: "100%",
     },
   },
@@ -37,4 +37,7 @@ export const useStyles = makeStyles((theme) => ({
   classRight: {
     float: "right",
   },
-}));
+  paraClass: {
+    margin: "20px 0"
+  }
+} ) );

@@ -5,7 +5,7 @@ import {
   SINGLE_USER,
   GET_TASK,
   DELETE_TASK,
-  GET_COMPLETE_TASK
+  GET_COMPLETE_TASK, GET_DETAIL_TASK, DELETE_DETAIL_TASK
 } from "../../Action/Types";
 
 const initalState = {
@@ -14,7 +14,8 @@ const initalState = {
   userList: null,
   user: null,
   taskList: [],
-  CompleteTask: []
+  CompleteTask: [],
+  DetailCompleteTask: []
 };
 
 export default function ( state = initalState, action ) {
@@ -54,6 +55,16 @@ export default function ( state = initalState, action ) {
       return {
         ...state,
         CompleteTask: action.payload,
+      };
+    case GET_DETAIL_TASK:
+      return {
+        ...state,
+        DetailCompleteTask: action.payload,
+      };
+    case DELETE_DETAIL_TASK:
+      return {
+        ...state,
+        DetailCompleteTask: action.payload,
       };
     default:
       return state;

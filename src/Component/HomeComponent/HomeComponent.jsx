@@ -13,17 +13,10 @@ const HomeComponent = () => {
       <div className={ classes.HomeClass }>
         <Container>
           <Grid container spacing={ 2 }>
-            <Grid item md={ 6 }>
-              <Link to="/get-task" className={ classes.LinkClass }><ButtonComponrnt value="Get Task" className={ classes.ButtonClass } /></Link>
-            </Grid>
-            <Grid item md={ 6 }>
-              <Link to="/completed-task" className={ classes.LinkClass }><ButtonComponrnt value="Completed Task" className={ classes.ButtonClass } /></Link>
-            </Grid>
+
           </Grid>
           <Grid container spacing={ 1 }>
-            <Grid item md={ 12 }>
-              <GetTask />
-            </Grid>
+
 
           </Grid>
         </Container>

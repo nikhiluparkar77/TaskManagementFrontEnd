@@ -7,6 +7,7 @@ import { getCompleteTask } from '../../../Redux/Action/Admin/AuthAdmin';
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 import { Container, Grid, } from "@material-ui/core";
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@material-ui/core";
+import ButtonComponrnt from '../../Comman/Fields/ButtonComponrnt';
 
 const StyledTableCell = withStyles( ( theme ) => ( {
     head: {
@@ -34,6 +35,10 @@ const useStyles = makeStyles( {
     root: {
         flexGrow: 1,
         margin: "4% 0%",
+    },
+    LinkClass: {
+        textDecoration: "none",
+        color: "#3f51b5",
     },
 } );
 
@@ -86,18 +91,18 @@ const TaskStatus = ( { getCompleteTask, adminAuth } ) => {
                                 <StyledTableCell align="left">{ item.Priority }</StyledTableCell>
                                 <StyledTableCell align="left">{ item.Status }</StyledTableCell>
                                 <StyledTableCell>
-                                    {/* <ButtonComponrnt
-                                        onClick={ ( e ) => {
-                                            HandleAssignDelete( item._id );
-                                        } }
-                                        value="Delete"
-                                    /> */}
+                                    <Link to={ `/admin/task-details/${ item._id }` } className={ classes.LinkClass }>
+                                        <ButtonComponrnt
+
+                                            value="Details"
+                                        />
+                                    </Link>
                                 </StyledTableCell>
                             </StyledTableRow>
                         ) ) }
                     </TableBody>
                 </Table>
-            </TableContainer>
+            </TableContainer >
         );
     }
 

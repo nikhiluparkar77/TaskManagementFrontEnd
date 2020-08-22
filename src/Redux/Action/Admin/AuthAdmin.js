@@ -7,7 +7,9 @@ import {
   SINGLE_USER,
   GET_TASK,
   DELETE_TASK,
-  GET_COMPLETE_TASK
+  GET_COMPLETE_TASK,
+  GET_DETAIL_TASK,
+  DELETE_DETAIL_TASK
 } from "../../Action/Types";
 import setAdminAuthToken from "../../../Component/Admin/SetAdminAuth/SetAdminAuthToken";
 
@@ -140,6 +142,23 @@ export const taskDeleteFunc = ( id ) => ( dispatch ) => {
 export const getCompleteTask = () => ( dispatch ) => {
   axios.get( "http://localhost:5000/api/complete/AdminListTask" ).then( ( res ) => dispatch( {
     type: GET_COMPLETE_TASK,
+    payload: res.data
+  } ) ).catch( ( err ) => console.log( err ) );
+};
+
+// Get Complete Task Details
+export const getDetailsTask = ( id ) => ( dispatch ) => {
+  axios.get( `http://localhost:5000/api/complete/getAdminTask/${ id }` ).then( ( res ) => dispatch( {
+    type: GET_DETAIL_TASK,
+    payload: res.data
+  } ) ).catch( ( err ) => console.log( err ) );
+};
+
+// Get Complete Task Delete
+export const getDeleteDatailTask = ( id ) => ( dispatch ) => {
+
+  axios.delete( `http://localhost:5000/api/complete/deleteTask/${ id }` ).then( ( res ) => dispatch( {
+    type: DELETE_DETAIL_TASK,
     payload: res.data
   } ) ).catch( ( err ) => console.log( err ) );
 };

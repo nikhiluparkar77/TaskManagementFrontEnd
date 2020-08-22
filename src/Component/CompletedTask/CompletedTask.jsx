@@ -52,9 +52,9 @@ const CompletedTask = ( { getTask, userAuth } ) => {
         SetCompleteTaskList( userAuth.listedTask );
     }, [ userAuth.listedTask ] );
 
-    console.log( CompleteTaskList );
+
     let CompleteList;
-    if ( CompleteTaskList.length === 0 ) {
+    if ( CompleteTaskList == null ) {
         CompleteList = <h1> No Assign Task Avilable</h1>;
     } else {
         CompleteList = (
@@ -68,7 +68,6 @@ const CompletedTask = ( { getTask, userAuth } ) => {
                             <StyledTableCell align="left">End Time</StyledTableCell>
 
                             <StyledTableCell align="left">Status</StyledTableCell>
-                            <StyledTableCell align="left">Action</StyledTableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -82,12 +81,7 @@ const CompletedTask = ( { getTask, userAuth } ) => {
                                 <StyledTableCell align="left"><Moment format="YYYY/MM/DD">{ item.EndTime }</Moment></StyledTableCell>
 
                                 <StyledTableCell align="left">{ item.Status }</StyledTableCell>
-                                <StyledTableCell>
-                                    <Link to={ `/get-details/${ item._id }` }>
-                                        <ButtonComponrnt
-                                            value="Details"
-                                        />
-                                    </Link> </StyledTableCell>
+
                             </StyledTableRow>
                         ) ) }
                     </TableBody>

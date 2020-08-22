@@ -27,6 +27,8 @@ import TaskAssign from "./Component/Admin/TaskAssign/TaskAssign";
 import GetAssignTask from "./Component/GetTask/GetAssignTask/GetTask";
 import CompletedTask from "./Component/CompletedTask/CompletedTask";
 import GetDetailAssignTask from "./Component/GetTask/GetDetailAssignTask/GetDetailAssignTask";
+import DashBord from "./Component/HomeComponent/DashBord";
+import DetailsTaskStatus from "./Component/Admin/TaskStatus/GetDetailTask/GetDetailsTask";
 
 
 if ( localStorage.jwtToken ) {
@@ -61,6 +63,7 @@ function App() {
 
           <Switch>
             <Route path="/menu" component={ MenuListComposition } />
+            <PrivateRoutes path="/admin/task-details/:tid" component={ DetailsTaskStatus } />
             <PrivateRoutes path="/admin/task-status" component={ TaskStatus } />
             <PrivateRoutes
               path="/admin/edit-user/:userId"
@@ -74,7 +77,7 @@ function App() {
 
             <UserPrivateRoute path="/get-details/:gtId" component={ GetDetailAssignTask } />
             <UserPrivateRoute path="/get-task" component={ GetAssignTask } />
-            <UserPrivateRoute path="/home" component={ HomeComponent } />
+            <UserPrivateRoute path="/home" component={ DashBord } />
             <Route path="/completed-task" component={ CompletedTask } />
             <Route path="/sign-in" component={ SignIn } />
             <Route path="/" component={ HomeComponent } />
